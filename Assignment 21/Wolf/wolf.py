@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread("4.jpg",0)
+img = cv2.imread("Wolf/4.jpg",0)
 
 height, width = img.shape
 print(img.shape)
@@ -10,4 +10,6 @@ for i in range(height):
             img[i,j] = 0
 
 cv2.imshow("img",img)
+cv2.imwrite('Wolf.jpg',img)
+
 cv2.waitKey()
