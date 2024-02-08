@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("p.png",0)
+img = cv2.imread("black line\p.PNG",0)
 
 x=0
 for i in range(130):
