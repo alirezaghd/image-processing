@@ -1,4 +1,4 @@
-# Image Procsesing
+# Assignment 1
 
 <table>
   <tr>
@@ -19,7 +19,7 @@
     <tr align="center" >
     <td  ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%201/Sad%20or%20Happy">make them happy</a></td>
     <td  >These two men are sad😔. Rotate the image 180 degrees to make them happy😊.</td>
-    <td ><img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%201/Sad%20or%20Happy/3.jpg" width="30%" height="30%" >|| <img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%201/Invert%20dark%20and%20light/1.jpg" width="30%" height="30%" ></td>
+    <td ><img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%201/SadorHappy/3.jpg" width="30%" height="30%" >|| <img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%201/SadorHappy/MakeHappy.jpg" width="30%" height="30%" ></td>
   </tr>
     </tr>
   <tr align="center" >
