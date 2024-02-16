@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import imageio
 
 
 fps = 24
@@ -11,7 +12,9 @@ output_filename = 'noisy_video_with_overlay.avi'
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter(output_filename, fourcc, fps, (original_image.shape[1], original_image.shape[0]))
 
+height, width = original_image.shape
 
+frames = []
 while True:
 
     noisy_image = np.random.random((175, 242)) *255
@@ -21,6 +24,7 @@ while True:
     
     colored_image = cv2.cvtColor(original_image, cv2.COLOR_GRAY2BGR)
 
+    frames.append(cv2.cvtColor(colored_image, cv2.COLOR_BGR2RGB))
 
     cv2.imshow('Noisy Image', colored_image)
     out.write(colored_image)
@@ -30,6 +34,9 @@ while True:
 
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
-    
+
+
+output_gif = 'noisely_scene.gif'
+imageio.mimsave(output_gif, frames, 'GIF', duration=0.25)
 out.release()
 cv2.destroyAllWindows()
