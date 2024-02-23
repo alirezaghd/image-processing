@@ -39,5 +39,6 @@ center_circle_center = (width // 2, height // 2)
 cv2.circle(array, center_circle_center, center_circle_radius, (255, 255, 255), 5)
 
 
-cv2.imshow('Photo', array) 
+cv2.imshow('Photo', array)
+cv2.imwrite("football.jpg",array)
 cv2.waitKey()
