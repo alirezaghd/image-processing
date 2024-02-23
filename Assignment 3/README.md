@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 
 <table>
   <tr>
@@ -7,20 +7,20 @@
     <th>Image</th>
   </tr>
   <tr>
-    <td align="center" ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%202/Batman">batman logo</a></td>
-    <td align="center" >Make the batman logo</td>
-    <td align="center"><img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Batman/bat.jpg" width="30%" height="30%"> || <img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Batman/BatmanLogo.jpg" width="30%" height="30%"></td>
+    <td align="center" ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%203/Football%20Pitch">football</a></td>
+    <td align="center" >Draw a football pitch  ⚽️</td>
+    <td align="center"><img src="Football Pitch\football.jpg" width="30%" height="30%"> </td>
   </tr>
   <tr>
-    <td align="center" ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%202/Noise">TV noise</a></td>
-    <td align="center" >Make a TV noise, save as a gif file and send it to the group</td>
-    <td align="center"><img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Noise/TV.jpg" width="30%" height="30%" >|| 
-      <img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Noise/noisely_scene.gif" width="30%" height="30%" >
+    <td align="center" ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%203/CountCat">count cats</a></td>
+    <td align="center" > program for read an image and count number of cats</td>
+    <td align="center"><img src="CountCat\output\result.jpg" width="30%" height="30%" >
   </tr>
     <tr align="center" >
-    <td  ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%201/Sad%20or%20Happy">Snow</a></td>
-    <td  >Make a landscape with snowfall, save as a gif file and send it to the group.</td>
-    <td ><img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Snow/Snow.jpg" width="30%" height="30%" >|| <img src="https://raw.githubusercontent.com/alirezaghd/image-processing/main/Assignment%202/Snow/snowy_scene.gif" width="30%" height="30%" ></td>
+    <td  ><a href="https://github.com/alirezaghd/image-processing/tree/main/Assignment%203/SomeFiltersOnYourFace">some filters on your face</a></td>
+    <td  >program to open image and apply some filters on your face</td>
+    <td ><img src="SomeFiltersOnYourFace\Output\Result.png" width="30%" height="30%" >
+    </td>
   </tr>
     </tr>
 
