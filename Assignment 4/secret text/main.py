@@ -7,7 +7,7 @@ image2 = cv2.imread("secret text/Input/b.png",0)
 image1 = image1.astype(np.float32)
 image1 = image1 / 255
 image2 = image2.astype(np.float32)
-image2 = image2 * 255
+image2 = image2 / 255
 
 result = cv2.subtract(image1,image2)
 result = result.astype(np.uint8)
