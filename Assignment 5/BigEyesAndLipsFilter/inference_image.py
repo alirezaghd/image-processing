@@ -1,47 +1,62 @@
 import numpy as np
 import cv2
-import tensorflow as tf
-from functools import partial
-import time
 from TFLiteFaceDetector import UltraLightFaceDetecion
-import sys
 from TFLiteFaceAlignment import CoordinateAlignmentModel
 
+# Initialize face detector and face alignment models
+face_detector = UltraLightFaceDetecion("weights/RFB-320.tflite", conf_threshold=0.88)
+landmark_detector = CoordinateAlignmentModel("weights/coor_2d106.tflite")
 
-fd = UltraLightFaceDetecion("weights/RFB-320.tflite",conf_threshold=0.88)
-fa = CoordinateAlignmentModel("weights/coor_2d106.tflite")
+# Read the input image
+input_image = cv2.imread("a.jpg")
+detected_boxes, _ = face_detector.inference(input_image)
 
-# cap = cv2.VideoCapture(0)
-image = cv2.imread("a.jpg")
-color = (0, 0, 255)
+# Zoom factor
+zoom_factor = 2  
 
-start_time = time.perf_counter()
+def apply_zoom(image, landmark_points):
+    for landmarks in landmark_detector.get_landmarks(image, detected_boxes):  
 
-boxes, scores = fd.inference(image)
+        landmarks_selected = [landmarks[i] for i in landmark_points]
+        landmarks_selected = np.array(landmarks_selected, dtype=int)  
 
-for pred in fa.get_landmarks(image, boxes): # تعداد افراد
-    # for i , p in enumerate(np.round(pred).astype(np.uint)): # به تعداد دایره ها تکرار میشه
-    #     cv2.circle(image, tuple(p), 1, color, 1, cv2.LINE_AA)
-    #     cv2.putText(image, str(i),tuple(p),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,255,0))
+        x, y, w, h = cv2.boundingRect(landmarks_selected)  
+        mask = np.zeros_like(image, dtype=np.uint8)  
+        cv2.drawContours(mask, [landmarks_selected], -1, (255, 255, 255), -1)  
+
+        mask = mask // 255
+
+        masked_image = image * mask   
+        masked_image = masked_image[y:y+h, x:x+w]  
+        mask = mask[y:y+h, x:x+w]    
+       
+        resized_masked_image = cv2.resize(masked_image, (0, 0), fx=zoom_factor, fy=zoom_factor)
+        resized_mask = cv2.resize(mask, (0, 0), fx=zoom_factor, fy=zoom_factor)  
+
+        final_masked_image = np.zeros(image.shape, dtype=np.uint8)
+        final_mask = np.zeros(image.shape, dtype=np.uint8)
+
+        x = x - (w//2)
+        y = y - (h//2)
+
+        final_masked_image[y:y+h*2, x:x+w*2] = resized_masked_image
+        final_mask[y:y+h*2, x:x+w*2] = resized_mask
+
+        result = final_masked_image + image *(1 - final_mask)
+
+        return result
     
-    lips_landmark = []
-    for i in [52,55,56,53,59,58,61,68,67,71,63,64]:
-        lips_landmark.append(pred[i])
-    lips_landmark = np.array(lips_landmark, dtype=int)
-    print(lips_landmark)
-x, y, w, h = cv2.boundingRect(lips_landmark)
-mask = np.zeros(image.shape, dtype=np.uint8)
-cv2.drawContours(mask,[lips_landmark],-1,(255,255,255),-1)
+    
 
-mask = mask // 255
-result = image * mask
 
-result = result[y:y+h, x:x+w]
+lip_landmarks = [52, 55, 56, 53, 59, 58, 61, 68, 67, 71, 63, 64]
+left_eye_landmarks  = [39, 37, 33, 36, 35, 41, 40, 42]
+right_eye_landmarks = [95, 94, 96, 93, 91, 87, 90, 89]
 
-result_big = cv2.resize(result,(0,0),fx=2 , fy=2)
-
-print(time.perf_counter() - start_time)
-
-cv2.imshow("result", result_big)
+result_image = apply_zoom(input_image, lip_landmarks)             
+result_image = apply_zoom(result_image, left_eye_landmarks)             
+result_image = apply_zoom(result_image, right_eye_landmarks)             
+                
+cv2.imshow("Result", result_image)
+cv2.imwrite("output/result_face.jpg", result_image)
 cv2.waitKey()
-cv2.imwrite("output/result.jpg", result_big)
